@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars API Explorer</title>
+</head>
+<body>
+    <h1>Star Wars API Explorer</h1>
+    <form method="post" action="/">
+        <label for="category">Select Category:</label>
+        <select name="category" id="category" required>
+            <option value="people">Characters</option>
+            <option value="planets">Planets</option>
+            <option value="vehicles">Vehicles</option>
+            <option value="spaceships">Spaceships</option>
+            <option value="films">Films</option>
+            <option value="species">Species</option>
+        </select>
+        <br>
+        <label for="entry_id">Enter ID:</label>
+        <input type="text" name="entry_id" id="entry_id" required>
+        <button type="submit">Get Info</button>
+    </form>
+
+    {% if data %}
+        <h2>{{ data.name }}</h2>
+        {% for key, value in data.items() %}
+            {% if key not in ["created", "edited", "url"] %}
+                <p><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ value }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
